@@ -1,10 +1,3 @@
-//
-//  iishuisssApp.swift
-//  iishuisss
-//
-//  Created by Bogdan Chupakhin on 04.05.2024.
-//
-
 import SwiftUI
 
 @main
