@@ -60,7 +60,6 @@ struct ContentView: View {
             // Consider showing an alert or updating the UI to reflect the error
         }
     }
-
     func parseCSV(_ csvData: String) {
         let rows = csvData.components(separatedBy: "\n")
         data = rows.compactMap { row in
@@ -79,7 +78,6 @@ struct ContentView: View {
             calculateExperimentDuration()
         }
     }
-
     func calculateExperimentDuration() {
         guard let firstTime = data.first?.time, let lastTime = data.last?.time else {
             experimentDuration = "Неизвестно"
@@ -95,7 +93,6 @@ struct ContentView: View {
 
 struct SignalView: View {
     var data: [(time: Int, voltage: Double, current: Double)]
-
     var body: some View {
         GeometryReader { geometry in
             let maxTime = CGFloat(data.last?.time ?? 1) // Assuming time is ordered and increases
