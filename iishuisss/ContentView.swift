@@ -6,7 +6,7 @@ struct ContentView: View {
     @State private var data: [(time: Int, voltage: Double, current: Double)] = []
 
     var body: some View {
-        NavigationView {  // Ensure this is wrapping your content
+        NavigationView {  
             VStack {
                 Button("Выбрать файл") {
                     selectFile()
