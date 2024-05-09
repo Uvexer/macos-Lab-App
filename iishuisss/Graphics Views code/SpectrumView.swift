@@ -5,26 +5,32 @@ struct SpectrumView: View {
     var data: [(time: Int, voltage: Double, current: Double)]
 
     var body: some View {
-        let fftResult = computeFFT(data.map { $0.voltage })
-        let maxFrequency = fftResult.max() ?? 1
-
-        return GeometryReader { geometry in
-            Path { path in
+        VStack {
+            GeometryReader { geometry in
+                let fftResult = computeFFT(data.map { $0.voltage })
+                let maxFrequency = fftResult.max() ?? 1
                 let scaleX = geometry.size.width / CGFloat(fftResult.count)
-       //         _ = geometry.size.height / CGFloat(maxFrequency)
-                
-                for (index, amplitude) in fftResult.enumerated() {
-                    let xPosition = CGFloat(index) * scaleX
-                    let yPosition = (1 - CGFloat(amplitude / maxFrequency)) * geometry.size.height
-                    
-                    if index == 0 {
-                        path.move(to: CGPoint(x: xPosition, y: yPosition))
-                    } else {
-                        path.addLine(to: CGPoint(x: xPosition, y: yPosition))
+
+                Path { path in
+                    for (index, amplitude) in fftResult.enumerated() {
+                        let xPosition = CGFloat(index) * scaleX
+                        let yPosition = (1 - CGFloat(amplitude / maxFrequency)) * geometry.size.height
+                        
+                        if index == 0 {
+                            path.move(to: CGPoint(x: xPosition, y: yPosition))
+                        } else {
+                            path.addLine(to: CGPoint(x: xPosition, y: yPosition))
+                        }
                     }
                 }
+                .stroke(Color.green, lineWidth: 2)
+
+                // Axis labels
+         //       Text("Frequency").font(.caption).position(x: geometry.size.width / 2, y: geometry.size.height + 15)
+           //     Text("Magnitude").font(.caption).rotationEffect(.degrees(-90)).position(x: -20, y: geometry.size.height / 2)
             }
-            .stroke(Color.green, lineWidth: 2)
+
+            Text("Spectrum Analysis Graph").font(.headline)
         }
     }
 
