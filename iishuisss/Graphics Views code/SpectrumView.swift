@@ -25,9 +25,6 @@ struct SpectrumView: View {
                 }
                 .stroke(Color.green, lineWidth: 2)
 
-                // Axis labels
-         //       Text("Frequency").font(.caption).position(x: geometry.size.width / 2, y: geometry.size.height + 15)
-           //     Text("Magnitude").font(.caption).rotationEffect(.degrees(-90)).position(x: -20, y: geometry.size.height / 2)
             }
 
             Text("Spectrum Analysis Graph").font(.headline)

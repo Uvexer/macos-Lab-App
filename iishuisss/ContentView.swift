@@ -1,47 +1,19 @@
 import SwiftUI
 import Accelerate
-struct ContentView: View {
-    @State private var filePath: String = ""
-    @State private var experimentDuration: String = ""
-    @State private var data: [(time: Int, voltage: Double, current: Double)] = []
 
-    var body: some View {
-        NavigationView {
-            VStack {
-                Button("Выбрать файл") {
-                    selectFile()
-                }
-                Text("Продолжительность эксперимента: \(experimentDuration)")
-                List(data, id: \.time) { item in
-                    Text("Время: \(item.time), Напряжение: \(item.voltage), Ток: \(item.current)")
-                }
-                HStack {
-                    NavigationLink(destination: SignalView(data: data)) {
-                        Text("Показать сигналы")
-                    }.disabled(data.isEmpty)
-
-                    NavigationLink(destination: SpectrumView(data: data)) {
-                        Text("Показать спектр сигнала")
-                    }.disabled(data.isEmpty)
-                    
-                    NavigationLink(destination: PowerView(data: data)) {
-                        Text("Показать графики мощностей")
-                    }.disabled(data.isEmpty)
-                }
-            }
-            .padding()
-        }
-    }
-
+class ViewModel: ObservableObject {
+    @Published var filePath: String = ""
+    @Published var experimentDuration: String = ""
+    @Published var data: [(time: Int, voltage: Double, current: Double)] = []
+    
     func selectFile() {
-        // Assuming using NSOpenPanel here is part of a macOS app.
         let dialog = NSOpenPanel()
         dialog.title = "Выберите CSV файл"
         dialog.showsResizeIndicator = true
         dialog.showsHiddenFiles = false
         dialog.canChooseDirectories = false
         dialog.canChooseFiles = true
-        dialog.allowedContentTypes = [.commaSeparatedText] // Use correct content types
+        dialog.allowedContentTypes = [.commaSeparatedText]
         
         if dialog.runModal() == .OK {
             if let url = dialog.url {
@@ -57,9 +29,9 @@ struct ContentView: View {
             parseCSV(contents)
         } catch {
             print("Error reading file: \(error)")
-            // Consider showing an alert or updating the UI to reflect the error
         }
     }
+    
     func parseCSV(_ csvData: String) {
         let rows = csvData.components(separatedBy: "\n")
         data = rows.compactMap { row in
@@ -78,6 +50,7 @@ struct ContentView: View {
             calculateExperimentDuration()
         }
     }
+    
     func calculateExperimentDuration() {
         guard let firstTime = data.first?.time, let lastTime = data.last?.time else {
             experimentDuration = "Неизвестно"
@@ -90,3 +63,36 @@ struct ContentView: View {
         experimentDuration = String(format: "%02d:%02d:%02d", hours, minutes, seconds)
     }
 }
+
+struct ContentView: View {
+    @StateObject private var viewModel = ViewModel()
+
+    var body: some View {
+        NavigationView {
+            VStack {
+                Button("Выбрать файл") {
+                    viewModel.selectFile()
+                }
+                Text("Продолжительность эксперимента: \(viewModel.experimentDuration)")
+                List(viewModel.data, id: \.time) { item in
+                    Text("Время: \(item.time), Напряжение: \(item.voltage), Ток: \(item.current)")
+                }
+                HStack {
+                    NavigationLink(destination: SignalView(data: viewModel.data)) {
+                        Text("Показать сигналы")
+                    }.disabled(viewModel.data.isEmpty)
+
+                    NavigationLink(destination: SpectrumView(data: viewModel.data)) {
+                        Text("Показать спектр сигнала")
+                    }.disabled(viewModel.data.isEmpty)
+                    
+                    NavigationLink(destination: PowerView(data: viewModel.data)) {
+                        Text("Показать графики мощностей")
+                    }.disabled(viewModel.data.isEmpty)
+                }
+            }
+            .padding()
+        }
+    }
+}
+

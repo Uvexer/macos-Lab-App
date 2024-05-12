@@ -1,14 +1,9 @@
-//
-//  SignalView.swift
-//  iishuisss
-//
-//  Created by Bogdan Chupakhin on 06.05.2024.
-//
-
 import SwiftUI
+import Accelerate
 
 struct SignalView: View {
     var data: [(time: Int, voltage: Double, current: Double)]
+
     var body: some View {
         VStack {
             GeometryReader { geometry in
@@ -20,7 +15,25 @@ struct SignalView: View {
                 let scaleYVoltage = geometry.size.height / CGFloat(maxVoltage)
                 let scaleYCurrent = geometry.size.height / CGFloat(maxCurrent)
 
-                ZStack(alignment: .bottomLeading) {
+                ZStack {
+                    // Grid
+                    ForEach(0..<Int(maxTime), id: \.self) { x in
+                        Path { path in
+                            let xPosition = CGFloat(x) * scaleX
+                            path.move(to: CGPoint(x: xPosition, y: 0))
+                            path.addLine(to: CGPoint(x: xPosition, y: geometry.size.height))
+                        }
+                        .stroke(Color.gray.opacity(0.3))
+                    }
+                    ForEach(0..<Int(maxVoltage / 10), id: \.self) { y in
+                        Path { path in
+                            let yPosition = CGFloat(y * 10) * scaleYVoltage
+                            path.move(to: CGPoint(x: 0, y: yPosition))
+                            path.addLine(to: CGPoint(x: geometry.size.width, y: yPosition))
+                        }
+                        .stroke(Color.gray.opacity(0.3))
+                    }
+
                     // Voltage path
                     Path { path in
                         var firstPoint = true
@@ -38,7 +51,7 @@ struct SignalView: View {
                     }
                     .stroke(Color.blue, lineWidth: 2)
 
-                  
+                    // Current path
                     Path { path in
                         var firstPoint = true
                         for point in data {
@@ -54,14 +67,15 @@ struct SignalView: View {
                         }
                     }
                     .stroke(Color.red, lineWidth: 2)
+                }
+                .clipped()
 
-                    // Axes labels
-                //    Text("Time (s)").font(.caption).position(x: geometry.size.width / 2, y: geometry.size.height + 15)
-                  //  Text("Amplitude").font(.caption).rotationEffect(.degrees(-90)).position(x: -20, y: geometry.size.height / 2)
+         
                 }
             }
-
-            Text("Voltage and Current Graph").font(.headline)
+            Text("Voltage and Current Graph").padding().font(.title)
         }
     }
-}
+
+
+

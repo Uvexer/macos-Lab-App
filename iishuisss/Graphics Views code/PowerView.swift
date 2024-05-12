@@ -29,9 +29,7 @@ struct PowerView: View {
                     }
                 }
                 .stroke(Color.orange, lineWidth: 2)
-                
-          //      Text("Time (s)").font(.caption).position(x: geometry.size.width / 2, y: geometry.size.height + 15)
-            //    Text("Power (W)").font(.caption).rotationEffect(.degrees(-90)).position(x: -20, y: geometry.size.height / 2)
+             
             }
 
             Text("Instantaneous Power Graph").font(.headline)
