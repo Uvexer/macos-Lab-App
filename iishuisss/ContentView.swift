@@ -69,30 +69,69 @@ struct ContentView: View {
 
     var body: some View {
         NavigationView {
-            VStack {
-                Button("Выбрать файл") {
-                    viewModel.selectFile()
+            VStack(alignment: .leading) {
+                Button(action: {
+                    withAnimation {
+                        viewModel.selectFile()
+                    }
+                }) {
+                    Text("Выбрать файл")
+                        .fontWeight(.medium)
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
+                        .shadow(radius: 5)
                 }
+                .padding(.horizontal)
+                .padding(.top)
+
                 Text("Продолжительность эксперимента: \(viewModel.experimentDuration)")
+                    .font(.headline)
+                    .padding(.horizontal)
+                    .padding(.top, 5)
+
                 List(viewModel.data, id: \.time) { item in
-                    Text("Время: \(item.time), Напряжение: \(item.voltage), Ток: \(item.current)")
+                    HStack {
+                        Text("Время: \(item.time)")
+                        Spacer()
+                        Text("Напряжение: \(String(format: "%.2f", item.voltage)) V")
+                        Spacer()
+                        Text("Ток: \(String(format: "%.2f", item.current)) A")
+                    }
+                    .padding(.vertical, 4)
                 }
                 HStack {
-                    NavigationLink(destination: SignalView(data: viewModel.data)) {
+                    NavigationLink(destination: SignalView(data: $viewModel.data)) {
                         Text("Показать сигналы")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.gray)
+                            .cornerRadius(8)
+                            .shadow(radius: 3)
                     }.disabled(viewModel.data.isEmpty)
 
-                    NavigationLink(destination: SpectrumView(data: viewModel.data)) {
+                    NavigationLink(destination: SpectrumView(data: $viewModel.data)) {
                         Text("Показать спектр сигнала")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.gray)
+                            .cornerRadius(8)
+                            .shadow(radius: 3)
                     }.disabled(viewModel.data.isEmpty)
-                    
-                    NavigationLink(destination: PowerView(data: viewModel.data)) {
+
+                    NavigationLink(destination: PowerView(data: $viewModel.data)) {
                         Text("Показать графики мощностей")
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.gray)
+                            .cornerRadius(8)
+                            .shadow(radius: 3)
                     }.disabled(viewModel.data.isEmpty)
                 }
+                .padding()
             }
-            .padding()
         }
     }
 }
-

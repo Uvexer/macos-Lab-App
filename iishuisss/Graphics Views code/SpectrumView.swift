@@ -2,7 +2,7 @@ import SwiftUI
 import Accelerate
 
 struct SpectrumView: View {
-    var data: [(time: Int, voltage: Double, current: Double)]
+    @Binding var data: [(time: Int, voltage: Double, current: Double)]
 
     var body: some View {
         VStack {
