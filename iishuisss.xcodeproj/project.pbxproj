@@ -3,32 +3,30 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		280D93672BE90207002FE525 /* data.csv in Resources */ = {isa = PBXBuildFile; fileRef = 280D93662BE90207002FE525 /* data.csv */; };
-		280D93692BE902AA002FE525 /* SignalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280D93682BE902AA002FE525 /* SignalView.swift */; };
-		280D936B2BE9032E002FE525 /* SpectrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280D936A2BE9032E002FE525 /* SpectrumView.swift */; };
-		280D936D2BE90387002FE525 /* PowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280D936C2BE90387002FE525 /* PowerView.swift */; };
 		288C6C3C2BE69E8C004214CB /* iishuisssApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288C6C3B2BE69E8C004214CB /* iishuisssApp.swift */; };
-		288C6C3E2BE69E8C004214CB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 288C6C3D2BE69E8C004214CB /* ContentView.swift */; };
 		288C6C402BE69E90004214CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288C6C3F2BE69E90004214CB /* Assets.xcassets */; };
 		288C6C432BE69E90004214CB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288C6C422BE69E90004214CB /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		280D93662BE90207002FE525 /* data.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = data.csv; path = "../../../Новая/data.csv"; sourceTree = "<group>"; };
-		280D93682BE902AA002FE525 /* SignalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalView.swift; sourceTree = "<group>"; };
-		280D936A2BE9032E002FE525 /* SpectrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumView.swift; sourceTree = "<group>"; };
-		280D936C2BE90387002FE525 /* PowerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerView.swift; sourceTree = "<group>"; };
 		288C6C382BE69E8C004214CB /* iishuisss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iishuisss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288C6C3B2BE69E8C004214CB /* iishuisssApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iishuisssApp.swift; sourceTree = "<group>"; };
-		288C6C3D2BE69E8C004214CB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		288C6C3F2BE69E90004214CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		288C6C422BE69E90004214CB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		288C6C442BE69E90004214CB /* iishuisss.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iishuisss.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A819E13E2C9E06DF005C6B7C /* Models */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Models; sourceTree = "<group>"; };
+		A819E1432C9E0702005C6B7C /* ViewModels */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ViewModels; sourceTree = "<group>"; };
+		A819E1482C9E0731005C6B7C /* Views */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Views; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		288C6C352BE69E8C004214CB /* Frameworks */ = {
@@ -41,16 +39,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		280D936E2BE903E7002FE525 /* Graphics Views code */ = {
-			isa = PBXGroup;
-			children = (
-				280D936C2BE90387002FE525 /* PowerView.swift */,
-				280D936A2BE9032E002FE525 /* SpectrumView.swift */,
-				280D93682BE902AA002FE525 /* SignalView.swift */,
-			);
-			path = "Graphics Views code";
-			sourceTree = "<group>";
-		};
 		288C6C2F2BE69E8B004214CB = {
 			isa = PBXGroup;
 			children = (
@@ -70,10 +58,11 @@
 		288C6C3A2BE69E8C004214CB /* iishuisss */ = {
 			isa = PBXGroup;
 			children = (
-				280D936E2BE903E7002FE525 /* Graphics Views code */,
+				A819E1482C9E0731005C6B7C /* Views */,
+				A819E1432C9E0702005C6B7C /* ViewModels */,
+				A819E13E2C9E06DF005C6B7C /* Models */,
 				280D93662BE90207002FE525 /* data.csv */,
 				288C6C3B2BE69E8C004214CB /* iishuisssApp.swift */,
-				288C6C3D2BE69E8C004214CB /* ContentView.swift */,
 				288C6C3F2BE69E90004214CB /* Assets.xcassets */,
 				288C6C442BE69E90004214CB /* iishuisss.entitlements */,
 				288C6C412BE69E90004214CB /* Preview Content */,
@@ -103,6 +92,11 @@
 			buildRules = (
 			);
 			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				A819E13E2C9E06DF005C6B7C /* Models */,
+				A819E1432C9E0702005C6B7C /* ViewModels */,
+				A819E1482C9E0731005C6B7C /* Views */,
 			);
 			name = iishuisss;
 			productName = iishuisss;
@@ -160,11 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				288C6C3E2BE69E8C004214CB /* ContentView.swift in Sources */,
-				280D93692BE902AA002FE525 /* SignalView.swift in Sources */,
 				288C6C3C2BE69E8C004214CB /* iishuisssApp.swift in Sources */,
-				280D936B2BE9032E002FE525 /* SpectrumView.swift in Sources */,
-				280D936D2BE90387002FE525 /* PowerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

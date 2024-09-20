@@ -1,8 +1,7 @@
 import SwiftUI
-import Accelerate
 
 struct PowerView: View {
-    @Binding var data: [(time: Int, voltage: Double, current: Double)]
+    @Binding var data: [DataPoint]
 
     var body: some View {
         VStack {
@@ -29,10 +28,10 @@ struct PowerView: View {
                     }
                 }
                 .stroke(Color.orange, lineWidth: 2)
-             
             }
 
             Text("Instantaneous Power Graph").font(.headline)
         }
     }
 }
+
